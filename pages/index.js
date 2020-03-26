@@ -53,16 +53,10 @@ const Home = () => {
 
       <style jsx>{`
       .container {
-        min-height: 100vh;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        margin: 10px;
       }
 
       main {
-        padding: 5rem 0;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -83,7 +77,6 @@ const Home = () => {
 
       .overview {
         max-width: 500px;
-        padding: 10px;
         height: 100px;
         overflow: scroll;
         font-family: Roboto;

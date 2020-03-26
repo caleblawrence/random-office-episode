@@ -25,9 +25,10 @@ $black: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1em;
     text-align: center; 
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
 }
 
 
