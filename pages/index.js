@@ -1,66 +1,60 @@
-import Head from 'next/head'
+import React, { useState } from "react";
+import Head from "next/head";
+import episodeData from "../episodeData/episodes.json";
 
-const Home = () => (
-  <div className="container">
-    <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-    <main>
-      <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
+const Home = () => {
+  const [episode, setEpisode] = useState();
 
-      <p className="description">
-        Get started by editing <code>pages/index.js</code>
-      </p>
+  const pickAnEpisode = () => {
+    const randomNumber = randomIntFromInterval(1, episodeData.length);
+    setEpisode(episodeData[randomNumber]);
+  };
 
-      <div className="grid">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+  return (
+    <div className="container">
+      <Head>
+        <title>Create Next App</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+      </Head>
 
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
+      <main>
+        {episode && (
+          <>
+            <h1 className="episodeName">{episode.name}</h1>
+            <p className="season">Season {episode.season_number}</p>
+            <p className="overview">{episode.overview}</p>
+            <img
+              className="img"
+              src={"https://image.tmdb.org/t/p/original" + episode.still_path}
+            ></img>
+          </>
+        )}
+        <div className="buttonContainer">
+          <button onClick={e => pickAnEpisode()} className="btn btn-1">
+            <svg>
+              <rect
+                x="0"
+                y="0"
+                fill="none"
+                width="100%"
+                height="100%"
+                style={{ color: "black", stroke: "black" }}
+              />
+            </svg>
+            Pick an episode
+          </button>
+        </div>
+      </main>
 
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
-
-        <a
-          href="https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="card"
-        >
-          <h3>Deploy &rarr;</h3>
-          <p>
-            Instantly deploy your Next.js site to a public URL with ZEIT Now.
-          </p>
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      <a
-        href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-      </a>
-    </footer>
-
-    <style jsx>{`
+      <style jsx>{`
       .container {
         min-height: 100vh;
-        padding: 0 0.5rem;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -76,128 +70,53 @@ const Home = () => (
         align-items: center;
       }
 
-      footer {
-        width: 100%;
+      .episodeName {
+        font-size: 60px;
+        font-family: Roboto;
+        margin-bottom: 5px;
+      }
+
+      .season {
+        font-size: 20px;
+        font-family: Roboto;
+      }
+
+      .overview {
+        max-width: 500px;
+        padding: 10px;
         height: 100px;
-        border-top: 1px solid #eaeaea;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow: scroll;
+        font-family: Roboto;
       }
 
-      footer img {
-        margin-left: 0.5rem;
+      .img {
+        max-width: 500px;
       }
 
-      footer a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .title a {
-        color: #0070f3;
-        text-decoration: none;
-      }
-
-      .title a:hover,
-      .title a:focus,
-      .title a:active {
-        text-decoration: underline;
-      }
-
-      .title {
-        margin: 0;
-        line-height: 1.15;
-        font-size: 4rem;
-      }
-
-      .title,
-      .description {
-        text-align: center;
-      }
-
-      .description {
-        line-height: 1.5;
-        font-size: 1.5rem;
-      }
-
-      code {
-        background: #fafafa;
-        border-radius: 5px;
-        padding: 0.75rem;
-        font-size: 1.1rem;
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-      }
-
-      .grid {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-
-        max-width: 800px;
-        margin-top: 3rem;
-      }
-
-      .card {
-        margin: 1rem;
-        flex-basis: 45%;
-        padding: 1.5rem;
-        text-align: left;
-        color: inherit;
-        text-decoration: none;
-        border: 1px solid #eaeaea;
-        border-radius: 10px;
-        transition: color 0.15s ease, border-color 0.15s ease;
-      }
-
-      .card:hover,
-      .card:focus,
-      .card:active {
-        color: #0070f3;
-        border-color: #0070f3;
-      }
-
-      .card h3 {
-        margin: 0 0 1rem 0;
-        font-size: 1.5rem;
-      }
-
-      .card p {
-        margin: 0;
-        font-size: 1.25rem;
-        line-height: 1.5;
-      }
-
-      @media (max-width: 600px) {
-        .grid {
-          width: 100%;
-          flex-direction: column;
+      @media only screen and (max-width: 768px) {
+        .episodeName {
+          font-size: 40px;
         }
       }
     `}</style>
 
-    <style jsx global>{`
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      }
+      <style jsx global>{`
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+        }
 
-      * {
-        box-sizing: border-box;
-      }
-    `}</style>
-  </div>
-)
-
-export default Home
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
+    </div>
+  );
+};
+export default Home;
