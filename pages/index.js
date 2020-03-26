@@ -16,6 +16,11 @@ const Home = () => {
 
   console.log(episode);
 
+  if (episode && episode.overview.length > 300) {
+    console.log('need to trim');
+    episode.overview = episode.overview.substring(0, 300) + "...";
+  }
+
   return (
     <div className="container">
       <Head>
@@ -96,7 +101,6 @@ const Home = () => {
         .overview {
           max-width: 500px;
           height: 100px;
-          overflow: scroll;
           font-family: Roboto;
         }
 
