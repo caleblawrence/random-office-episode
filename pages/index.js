@@ -19,7 +19,10 @@ const Home = () => {
       <Head>
         <title>Office Random Episode</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
       </Head>
 
       <main>
@@ -34,66 +37,76 @@ const Home = () => {
             ></img>
           </>
         )}
-        <div className="buttonContainer">
-          <button onClick={e => pickAnEpisode()} className="btn btn-1">
-            <svg>
-              <rect
-                x="0"
-                y="0"
-                fill="none"
-                width="100%"
-                height="100%"
-                style={{ color: "black", stroke: "black" }}
-              />
-            </svg>
-            Pick an episode
-          </button>
+        <div className={episode ? "" : "center-screen"}>
+          <div className="buttonContainer">
+            <button onClick={e => pickAnEpisode()} className="btn btn-1">
+              <svg>
+                <rect
+                  x="0"
+                  y="0"
+                  fill="none"
+                  width="100%"
+                  height="100%"
+                  style={{ color: "black", stroke: "black" }}
+                />
+              </svg>
+              Pick an episode
+            </button>
+          </div>
         </div>
       </main>
 
       <style jsx>{`
-      .container {
-        margin: 10px;
-      }
-
-      main {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .episodeName {
-        font-size: 60px;
-        font-family: Roboto;
-        margin-bottom: 5px;
-      }
-
-      .season {
-        font-size: 20px;
-        font-family: Roboto;
-      }
-
-      .overview {
-        max-width: 500px;
-        height: 100px;
-        overflow: scroll;
-        font-family: Roboto;
-      }
-
-      .img {
-        max-width: 500px;
-      }
-
-      }
-
-      @media only screen and (max-width: 768px) {
-        .episodeName {
-          font-size: 40px;
+        .container {
+          margin: 10px;
         }
-      }
-    `}</style>
+
+        main {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .episodeName {
+          font-size: 60px;
+          font-family: Roboto;
+          margin-bottom: 5px;
+        }
+
+        .season {
+          font-size: 20px;
+          font-family: Roboto;
+        }
+
+        .center-screen {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          min-height: 100vh;
+        }
+          
+        .overview {
+          max-width: 500px;
+          height: 100px;
+          overflow: scroll;
+          font-family: Roboto;
+        }
+
+        .img {
+          max-width: 500px;
+          max-height: 300px;
+        }
+
+        @media only screen and (max-width: 768px) {
+          .episodeName {
+            font-size: 30px;
+          }
+        }
+      `}</style>
 
       <style jsx global>{`
         html,
