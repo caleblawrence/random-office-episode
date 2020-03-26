@@ -14,6 +14,8 @@ const Home = () => {
     setEpisode(episodeData[randomNumber]);
   };
 
+  console.log(episode);
+
   return (
     <div className="container">
       <Head>
@@ -30,6 +32,7 @@ const Home = () => {
           <>
             <h1 className="episodeName">{episode.name}</h1>
             <p className="season">Season {episode.season_number}</p>
+            <p className="season">Episode {episode.episode_number}</p>
             <p className="overview">{episode.overview}</p>
             <img
               className="img"
@@ -78,6 +81,7 @@ const Home = () => {
         .season {
           font-size: 20px;
           font-family: Roboto;
+          margin: 5px
         }
 
         .center-screen {
